@@ -31,4 +31,7 @@ This is directly cribbed from the Flask megatutorial, just adapted so it's sligh
 - Run `python3 -m venv barter_env`
 - This creates a folder called `barter_env` in the top level of the repo. When we commit and push, this folder will be excluded (best practice is to leave environment stuff out of repos and have other ways to standardize that). 
 
-To activate the virtual environment, run `source barter_env/bin/activate`. Your terminal prompt should change to have `barter_env` in parentheses to the left of the prompt. Now the environment is active, all packages installed won't be installed on the entire VM and only for the project.
+To activate the virtual environment, run `source barter_env/bin/activate`. Your terminal prompt should change to have `barter_env` in parentheses to the left of the prompt. Now the environment is active, all packages installed won't be installed on the entire VM and only for the project. To deactivate it, just run `deactivate`. 
+
+## Installing packages
+The nice part about all this setup is that installing the packages should be pretty simple. It (should be) as easy as running `pip install -r requirements.txt` when the virtual environment is active. That's it. This command will tell pip to install all the packages that are in `requirements.txt` as well as the specified version.
