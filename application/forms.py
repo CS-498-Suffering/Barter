@@ -26,3 +26,12 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+    def validate_password(self, password):
+        uppercase_check = False
+        for character in password.data:
+            if character.isupper():
+                uppercase_check = True
+                break
+        if uppercase_check is False:
+            raise ValidationError('Password must have at least one capital letter')
