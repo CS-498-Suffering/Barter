@@ -1,0 +1,72 @@
+2023-04-23 22:28:02,959 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
+2023-04-23 22:36:38,605 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
+2023-04-23 22:41:10,323 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
+2023-04-23 22:42:19,406 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
+2023-04-23 22:42:36,477 ERROR: Exception on /index [GET] [in /home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask/app.py:1744]
+Traceback (most recent call last):
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 748, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such table: followers
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask/app.py", line 2528, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask/app.py", line 1825, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask/app.py", line 1823, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask/app.py", line 1799, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask_login/utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "/home/rylee_kei/Barter/application/routes.py", line 30, in index
+    posts = current_user.followed_posts().paginate(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask_sqlalchemy/query.py", line 99, in paginate
+    return QueryPagination(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask_sqlalchemy/pagination.py", line 69, in __init__
+    items = self._query_items()
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/flask_sqlalchemy/pagination.py", line 354, in _query_items
+    out = query.limit(self.per_page).offset(self._query_offset).all()
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2697, in all
+    return self._iter().all()  # type: ignore
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/orm/query.py", line 2855, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2229, in execute
+    return self._execute_internal(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/orm/session.py", line 2124, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/orm/context.py", line 253, in orm_execute_statement
+    result = conn.execute(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1414, in execute
+    return meth(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/sql/elements.py", line 486, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1638, in _execute_clauseelement
+    ret = self._execute_context(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1842, in _execute_context
+    return self._exec_single_context(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1983, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 2326, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/base.py", line 1964, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/rylee_kei/Barter/barter_env/lib/python3.10/site-packages/sqlalchemy/engine/default.py", line 748, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such table: followers
+[SQL: SELECT anon_1.post_id AS anon_1_post_id, anon_1.post_body AS anon_1_post_body, anon_1.post_timestamp AS anon_1_post_timestamp, anon_1.post_user_id AS anon_1_post_user_id 
+FROM (SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id 
+FROM post JOIN followers ON followers.followed_id = post.user_id 
+WHERE followers.follower_id = ? UNION SELECT post.id AS post_id, post.body AS post_body, post.timestamp AS post_timestamp, post.user_id AS post_user_id 
+FROM post 
+WHERE post.user_id = ?) AS anon_1 ORDER BY anon_1.post_timestamp DESC
+ LIMIT ? OFFSET ?]
+[parameters: (4, 4, 25, 0)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2023-04-23 22:48:53,707 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
+2023-04-23 22:49:13,429 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
+2023-04-25 22:15:43,930 INFO: Barter startup [in /home/rylee_kei/Barter/application/__init__.py:48]
